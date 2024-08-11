@@ -7,6 +7,7 @@ import { MainPageProps } from "@/types";
 import CountryCard from "@/components/mainPage/CountryCard/CountryCard";
 import SearchInput from "@/components/mainPage/SearchInput/SearchInput";
 import Dropdown from "@/components/mainPage/DropDown/DropDown";
+import { useRouter } from "next/navigation";
 
 const Wrapper = styled.div<{ $backgroundColor: string }>`
   display: flex;
@@ -30,6 +31,7 @@ const FilterContainer = styled.div`
 
 const MainPage: React.FC<MainPageProps> = ({ countries }) => {
   const { theme } = useTheme();
+  const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
   const [selectValue, setSelectValue] = useState("");
 
@@ -71,6 +73,7 @@ const MainPage: React.FC<MainPageProps> = ({ countries }) => {
       <CountriesContainer>
         {filteredCountries.map((country) => (
           <CountryCard
+            handleClick={() => router.push(`/${country.name}`)}
             key={country.code}
             code={country.code}
             name={country.name}

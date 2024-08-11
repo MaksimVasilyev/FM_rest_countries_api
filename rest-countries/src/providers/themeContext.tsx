@@ -6,13 +6,13 @@ interface ThemeContext {
   toggleTheme: () => void;
 }
 const defaultContextValue: ThemeContext = {
-  theme: "dark",
+  theme: "light",
   toggleTheme: () => {},
 };
 const ThemeContext = createContext<ThemeContext>(defaultContextValue);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
 
   const toggleTheme = () =>
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));

@@ -5,6 +5,7 @@ import { useTheme } from "@/providers/themeContext";
 import styled from "styled-components";
 
 const Container = styled.div<{ $backgroundColor: string }>`
+  cursor: pointer;
   height: 336px;
   width: 264px;
   display: flex;
@@ -71,6 +72,7 @@ interface CountryCardProps {
   population: number;
   region: string;
   capital: string;
+  handleClick: () => void;
 }
 
 const CountryCard: React.FC<CountryCardProps> = ({
@@ -79,6 +81,7 @@ const CountryCard: React.FC<CountryCardProps> = ({
   population,
   region,
   capital,
+  handleClick,
 }) => {
   const { theme } = useTheme();
 
@@ -98,7 +101,10 @@ const CountryCard: React.FC<CountryCardProps> = ({
     themeProperties.light;
 
   return (
-    <Container $backgroundColor={currentTheme.backgroundColor}>
+    <Container
+      $backgroundColor={currentTheme.backgroundColor}
+      onClick={handleClick}
+    >
       <FlagContainer>
         <FlagImage src={`https://flagcdn.com/w320/${code}.png`} alt="Flag" />
       </FlagContainer>
