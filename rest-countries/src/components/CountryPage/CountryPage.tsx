@@ -1,9 +1,9 @@
 "use client";
 import styled from "styled-components";
 import { useTheme } from "@/providers/themeContext";
-import { colors } from "@/styles/colors";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
 const MainContainer = styled.div<{ $backgroundColor: string; $color: string }>`
   display: flex;
@@ -147,35 +147,16 @@ const CountryPage: React.FC<CountryPageProps> = ({
   borderCountries,
 }) => {
   const { theme } = useTheme();
+  const { backgroundColor, color, elementBg } = useCurrentTheme();
   const router = useRouter();
   const buttonBack = theme === "light" ? "back-arrow-light" : "back-arrow-dark";
 
-  const themeProperties = {
-    dark: {
-      backgroundColor: colors.very_dark_blue_bg,
-      color: colors.white,
-      elementBg: colors.dark_blue,
-    },
-    light: {
-      backgroundColor: colors.very_light_grey,
-      color: colors.very_dark_blue_text,
-      elementBg: colors.white,
-    },
-  };
-
-  const currentTheme =
-    themeProperties[theme as keyof typeof themeProperties] ||
-    themeProperties.light;
-
   return (
-    <MainContainer
-      $backgroundColor={currentTheme.backgroundColor}
-      $color={currentTheme.color}
-    >
+    <MainContainer $backgroundColor={backgroundColor} $color={color}>
       <BackButton
         onClick={() => router.push("/")}
-        $elementBg={currentTheme.elementBg}
-        $color={currentTheme.color}
+        $elementBg={elementBg}
+        $color={color}
       >
         <Image
           src={`icons/${buttonBack}.svg`}
@@ -241,8 +222,8 @@ const CountryPage: React.FC<CountryPageProps> = ({
                   router.push(`${country}`);
                 }}
                 key={country}
-                $elementBg={currentTheme.elementBg}
-                $color={currentTheme.color}
+                $elementBg={elementBg}
+                $color={color}
               >
                 {country}
               </BorderButton>

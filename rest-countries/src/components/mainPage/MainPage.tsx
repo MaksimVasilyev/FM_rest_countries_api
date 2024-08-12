@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import styled from "styled-components";
-import { useTheme } from "@/providers/themeContext";
-import { colors } from "@/styles/colors";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 import { MainPageProps } from "@/types";
 import CountryCard from "@/components/mainPage/CountryCard/CountryCard";
 import SearchInput from "@/components/mainPage/SearchInput/SearchInput";
@@ -30,7 +29,7 @@ const FilterContainer = styled.div`
 `;
 
 const MainPage: React.FC<MainPageProps> = ({ countries }) => {
-  const { theme } = useTheme();
+  const { backgroundColor } = useCurrentTheme();
   const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
   const [selectValue, setSelectValue] = useState("");
@@ -51,21 +50,8 @@ const MainPage: React.FC<MainPageProps> = ({ countries }) => {
     return matchesSearch && matchesRegion;
   });
 
-  const themeProperties = {
-    dark: {
-      backgroundColor: colors.very_dark_blue_bg,
-    },
-    light: {
-      backgroundColor: colors.very_light_grey,
-    },
-  };
-
-  const currentTheme =
-    themeProperties[theme as keyof typeof themeProperties] ||
-    themeProperties.light;
-
   return (
-    <Wrapper $backgroundColor={currentTheme.backgroundColor}>
+    <Wrapper $backgroundColor={backgroundColor}>
       <FilterContainer>
         <SearchInput onChange={handleInputChange} />
         <Dropdown onSelect={handleSelect} />

@@ -1,6 +1,7 @@
 "use client";
-import { colors } from "@/styles/colors";
+
 import { useTheme } from "@/providers/themeContext";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
 import styled from "styled-components";
 
@@ -84,41 +85,24 @@ const CountryCard: React.FC<CountryCardProps> = ({
   handleClick,
 }) => {
   const { theme } = useTheme();
-
-  const themeProperties = {
-    dark: {
-      backgroundColor: colors.dark_blue,
-      color: colors.white,
-    },
-    light: {
-      backgroundColor: colors.white,
-      color: colors.very_dark_blue_text,
-    },
-  };
-
-  const currentTheme =
-    themeProperties[theme as keyof typeof themeProperties] ||
-    themeProperties.light;
+  const { color, elementBg } = useCurrentTheme();
 
   return (
-    <Container
-      $backgroundColor={currentTheme.backgroundColor}
-      onClick={handleClick}
-    >
+    <Container $backgroundColor={elementBg} onClick={handleClick}>
       <FlagContainer>
         <FlagImage src={`https://flagcdn.com/w320/${code}.png`} alt="Flag" />
       </FlagContainer>
-      <H2 $color={currentTheme.color}>{name}</H2>
+      <H2 $color={color}>{name}</H2>
       <TextWrapper>
-        <P $color={currentTheme.color}>
+        <P $color={color}>
           <Span>Population: </Span>
           {population}
         </P>
-        <P $color={currentTheme.color}>
+        <P $color={color}>
           <Span>Region: </Span>
           {region}
         </P>
-        <P $color={currentTheme.color}>
+        <P $color={color}>
           <Span>Capital: </Span>
           {capital}
         </P>

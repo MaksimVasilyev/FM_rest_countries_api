@@ -1,7 +1,8 @@
 "use client";
 import styled from "styled-components";
 import { useTheme } from "@/providers/themeContext";
-import { colors } from "@/styles/colors";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+import Image from "next/image";
 
 const Container = styled.div<{ $backgroundColor: string }>`
   height: 80px;
@@ -33,36 +34,22 @@ const ModeText = styled.p<{ $color: string }>`
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
-
-  const themeProperties = {
-    dark: {
-      backgroundColor: colors.dark_blue,
-      color: colors.white,
-    },
-    light: {
-      backgroundColor: colors.white,
-      color: colors.very_dark_blue_text,
-    },
-  };
+  const { elementBg, color } = useCurrentTheme();
 
   const themeModText = theme === "light" ? "Dark mode" : "Light mode";
   const themeModImg = theme === "light" ? "moon" : "sun";
 
-  const currentTheme =
-    themeProperties[theme as keyof typeof themeProperties] ||
-    themeProperties.light;
-
   return (
-    <Container $backgroundColor={currentTheme.backgroundColor}>
-      <H1 $color={currentTheme.color}>Where in the world?</H1>
+    <Container $backgroundColor={elementBg}>
+      <H1 $color={color}>Where in the world?</H1>
       <ModeSwitcherContainer onClick={toggleTheme}>
-        <img
+        <Image
           src={`icons/${themeModImg}.svg`}
           alt="Icon"
           width={24}
           height={24}
         />
-        <ModeText $color={currentTheme.color}>{themeModText}</ModeText>
+        <ModeText $color={color}>{themeModText}</ModeText>
       </ModeSwitcherContainer>
     </Container>
   );

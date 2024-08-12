@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { colors } from "@/styles/colors";
-import { useTheme } from "@/providers/themeContext";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 
 const DropdownContainer = styled.div`
   position: relative;
@@ -52,7 +51,8 @@ const regions = ["All", "Africa", "Americas", "Asia", "Europe", "Oceania"];
 const Dropdown = ({ onSelect }: { onSelect: (region: string) => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("Filter by region");
-  const { theme } = useTheme();
+
+  const { elementBg, color } = useCurrentTheme();
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -62,42 +62,22 @@ const Dropdown = ({ onSelect }: { onSelect: (region: string) => void }) => {
     onSelect(region);
   };
 
-  const themeProperties = {
-    dark: {
-      backgroundColor: colors.dark_blue,
-      color: colors.white,
-    },
-    light: {
-      backgroundColor: colors.white,
-      color: colors.very_dark_blue_text,
-    },
-  };
-
-  const currentTheme =
-    themeProperties[theme as keyof typeof themeProperties] ||
-    themeProperties.light;
-
   return (
     <DropdownContainer>
       <DropdownButton
-        $color={currentTheme.color}
-        $backgroundColor={currentTheme.backgroundColor}
+        $color={color}
+        $backgroundColor={elementBg}
         onClick={toggleDropdown}
       >
         {selectedRegion}
-        <span style={{ marginLeft: "auto" }}>
-          {isOpen ? "▲" : "▼"} {/* Change the symbol based on isOpen */}
-        </span>
+        <span style={{ marginLeft: "auto" }}>{isOpen ? "▲" : "▼"}</span>
       </DropdownButton>
       {isOpen && (
-        <DropdownList
-          $color={currentTheme.color}
-          $backgroundColor={currentTheme.backgroundColor}
-        >
+        <DropdownList $color={color} $backgroundColor={elementBg}>
           {regions.map((region) => (
             <DropdownItem
-              $color={currentTheme.color}
-              $backgroundColor={currentTheme.backgroundColor}
+              $color={color}
+              $backgroundColor={elementBg}
               key={region}
               onClick={() => handleSelect(region)}
             >

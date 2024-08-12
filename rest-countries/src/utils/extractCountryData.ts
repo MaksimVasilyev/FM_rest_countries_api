@@ -31,6 +31,7 @@ export function extractCountryData(data: any): ExtractedCountryData {
       .join(", "),
     languages: Object.values(data[0].languages).join(", "),
     borderCountries:
-      data[0].borders.map((code: string) => countryCodeToName[code]) || [],
+      (data[0].borders || []).map((code: string) => countryCodeToName[code]) ||
+      [],
   };
 }
