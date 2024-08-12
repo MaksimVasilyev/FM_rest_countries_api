@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+import { Media } from "@/styles/breakpoints";
 
 const DropdownContainer = styled.div`
   position: relative;
@@ -10,6 +11,8 @@ const DropdownButton = styled.div<{ $backgroundColor: string; $color: string }>`
   box-sizing: border-box;
   width: 200px;
   height: 56px;
+  font-size: 14px;
+  font-weight: 400;
   border-radius: 5px;
   box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.05);
   padding: 18px 19.5px 18px 24px;
@@ -18,6 +21,10 @@ const DropdownButton = styled.div<{ $backgroundColor: string; $color: string }>`
   align-items: center;
   color: ${(props) => props.$color};
   background-color: ${(props) => props.$backgroundColor};
+  @media ${Media.Mobile} {
+    height: 48px;
+    font-size: 12px;
+  }
 `;
 
 const DropdownList = styled.div<{ $backgroundColor: string; $color: string }>`
@@ -36,13 +43,19 @@ const DropdownList = styled.div<{ $backgroundColor: string; $color: string }>`
 
 const DropdownItem = styled.div<{ $backgroundColor: string; $color: string }>`
   padding: 10px;
+  font-size: 14px;
+  font-weight: 400;
   cursor: pointer;
   color: ${(props) => props.$color};
   background-color: ${(props) => props.$backgroundColor};
 
   &:hover {
-    background-color: ${(props) => props.$color}; /* Add hover effect */
+    background-color: ${(props) => props.$color};
     color: ${(props) => props.$backgroundColor};
+  }
+
+  @media ${Media.Mobile} {
+    font-size: 12px;
   }
 `;
 

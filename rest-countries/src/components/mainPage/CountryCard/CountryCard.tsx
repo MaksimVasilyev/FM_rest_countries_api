@@ -2,6 +2,7 @@
 
 import { useTheme } from "@/providers/themeContext";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+import { Media } from "@/styles/breakpoints";
 
 import styled from "styled-components";
 

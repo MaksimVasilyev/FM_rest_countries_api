@@ -7,6 +7,7 @@ import CountryCard from "@/components/mainPage/CountryCard/CountryCard";
 import SearchInput from "@/components/mainPage/SearchInput/SearchInput";
 import Dropdown from "@/components/mainPage/DropDown/DropDown";
 import { useRouter } from "next/navigation";
+import { Media } from "@/styles/breakpoints";
 
 const Wrapper = styled.div<{ $backgroundColor: string }>`
   display: flex;
@@ -15,17 +16,37 @@ const Wrapper = styled.div<{ $backgroundColor: string }>`
   background-color: ${(props) => props.$backgroundColor};
   padding: 48px 80px 45px 78px;
   min-height: 100vh;
+  @media ${Media.Mobile} {
+    padding: 0px;
+    padding-top: 24px;
+    gap: 28px;
+  }
 `;
 
 const CountriesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 67px 60px;
+  @media ${Media.Mobile} {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
 `;
 const FilterContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media ${Media.Mobile} {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    justify-content: flex-start;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 `;
 
 const MainPage: React.FC<MainPageProps> = ({ countries }) => {

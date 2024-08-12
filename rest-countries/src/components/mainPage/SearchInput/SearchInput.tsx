@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useTheme } from "@/providers/themeContext";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 import { useState } from "react";
+import { Media } from "@/styles/breakpoints";
 
 const Container = styled.div<{ $backgroundColor: string }>`
   position: relative;
@@ -11,6 +12,10 @@ const Container = styled.div<{ $backgroundColor: string }>`
   border-radius: 5px;
   box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.05);
   background-color: ${(props) => props.$backgroundColor};
+  @media ${Media.Mobile} {
+    height: 48px;
+    width: 100%;
+  }
 `;
 
 const Input = styled.input<{
@@ -22,7 +27,7 @@ const Input = styled.input<{
   height: 100%;
   padding-left: 74px;
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 14px;
   color: ${(props) => props.$inputColor};
   background-color: ${(props) => props.$backgroundColor};
   border: none;
@@ -35,6 +40,10 @@ const Input = styled.input<{
   &::placeholder {
     color: ${(props) => props.$inputColor};
     opacity: 1;
+  }
+
+  @media ${Media.Mobile} {
+    font-size: 12px;
   }
 `;
 
