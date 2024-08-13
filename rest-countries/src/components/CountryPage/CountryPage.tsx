@@ -4,22 +4,32 @@ import { useTheme } from "@/providers/themeContext";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+import { Media } from "@/styles/breakpoints";
 
 const MainContainer = styled.div<{ $backgroundColor: string; $color: string }>`
   display: flex;
   flex-direction: column;
-  gap: 90px;
+  gap: 80px;
   background-color: ${(props) => props.$backgroundColor};
   color: ${(props) => props.$color};
   min-height: 100vh;
   padding-top: 80px;
   padding-left: 80px;
   padding-right: 82px;
+  @media ${Media.Mobile} {
+    padding: 40px 27.16px 60px 28px;
+    gap: 64px;
+  }
 `;
 
 const Wrapper = styled.div`
   display: flex;
   gap: 120.29px;
+  @media ${Media.Mobile} {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
 `;
 const FlagContainer = styled.div`
   width: 559.71px;
@@ -28,6 +38,10 @@ const FlagContainer = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  @media ${Media.Mobile} {
+    width: 319.84px;
+    height: 275.92px;
+  }
 `;
 
 const FlagImage = styled.img`
@@ -39,19 +53,33 @@ const DataContainer = styled.div`
   gap: 68px;
   display: flex;
   flex-direction: column;
+  @media ${Media.Mobile} {
+    gap: 34px;
+  }
 `;
 const TextContainer = styled.div`
   display: flex;
   gap: 141px;
+  @media ${Media.Mobile} {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
 `;
 const LeftDataContainer = styled.div`
   margin-top: 39px;
   display: flex;
   flex-direction: column;
   gap: 23px;
+  @media ${Media.Mobile} {
+    margin-top: 0px;
+  }
 `;
 const RightDataContainer = styled.div`
   margin-top: 106px;
+  @media ${Media.Mobile} {
+    margin-top: 0px;
+  }
 `;
 const TextColumnContainer = styled.div`
   display: flex;
@@ -70,6 +98,9 @@ const H1 = styled.h1`
   font-size: 32px;
   font-weight: 800;
   margin: 0px;
+  @media ${Media.Mobile} {
+    font-size: 22px;
+  }
 `;
 
 const P = styled.p`
@@ -77,17 +108,29 @@ const P = styled.p`
   font-size: 16px;
   font-weight: 300;
   margin: 0px;
+  @media ${Media.Mobile} {
+    font-size: 14px;
+  }
 `;
 const Span = styled.span`
   font-family: Nunito Sans;
   font-size: 16px;
   font-weight: 600;
+  @media ${Media.Mobile} {
+    font-size: 14px;
+  }
 `;
 const BorderContainerSpan = styled.span`
   font-family: Nunito Sans;
   font-size: 16px;
   font-weight: 600;
   margin-right: 6px;
+  @media ${Media.Mobile} {
+    display: block;
+    width: 100%;
+    margin-right: 0px;
+    margin-bottom: 6px;
+  }
 `;
 
 const BorderButton = styled.button<{ $elementBg: string; $color: string }>`
@@ -117,6 +160,24 @@ const BackButton = styled.button<{ $elementBg: string; $color: string }>`
   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.29);
   background-color: ${(props) => props.$elementBg};
   color: ${(props) => props.$color};
+  @media ${Media.Mobile} {
+    width: 104px;
+    height: 32px;
+    font-size: 14px;
+    gap: 8px;
+  }
+`;
+const ButtonImageContainer = styled.div`
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media ${Media.Desktop} {
+    width: 12px;
+    height: 12px;
+  }
 `;
 
 interface CountryPageProps {
@@ -158,12 +219,14 @@ const CountryPage: React.FC<CountryPageProps> = ({
         $elementBg={elementBg}
         $color={color}
       >
-        <Image
-          src={`icons/${buttonBack}.svg`}
-          alt="Icon"
-          width={24}
-          height={24}
-        />
+        <ButtonImageContainer>
+          <Image
+            src={`icons/${buttonBack}.svg`}
+            alt="Icon"
+            width={20}
+            height={20}
+          />
+        </ButtonImageContainer>
         Back
       </BackButton>
       <Wrapper>
