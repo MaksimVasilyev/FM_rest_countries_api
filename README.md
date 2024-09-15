@@ -10,8 +10,7 @@ This project is a solution to the [Rest Countries API with Color Theme Switcher]
 
 1. Clone the repository:
 
-  ```bash
-   git clone https://github.com/MaksimVasilyev/FM_rest_countries_api
+   `git clone https://github.com/MaksimVasilyev/FM_rest_countries_api`
 
 2. Navigate to the project directory:
 
